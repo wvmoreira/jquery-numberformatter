@@ -14,8 +14,8 @@
 		color: #ff0000;
 	}
 	</style>
-	<script type="text/javascript" src="../lib/jquery-1.7.1.min.js"></script> <!-- 1.7.1 -->
-	<script type="text/javascript" src="../lib/jshashtable-2.1.js"></script> <!-- 2.1 -->
+	<script type="text/javascript" src="../lib/jquery-1.10.2.js"></script> <!-- 1.7.1 -->
+	<script type="text/javascript" src="../lib/jshashtable-3.0.js"></script> <!-- 2.1 -->
 	<script type="text/javascript" src="../src/jquery.numberformatter.js"></script> <!-- 1.2.3 -->
 	<script src="test.js"></script>
 </head>
@@ -144,7 +144,7 @@
 			<td class="nanForceZero">true</td>
 		</tr>
 		<tr class="formatNumberTest"> <td class="id">formatNumberTest3</td>
-			<td class="locale">us</td> <td class="format">##,##</td> <td class="input">$1000</td> <td class="output">n/a</td> <td class="ref">$1000</td> <td class="result">n/a</td>
+			<td class="locale">us</td> <td class="format">##,##</td> <td class="input">$1000</td> <td class="output">n/a</td> <td class="ref"></td> <td class="result">n/a</td>
 			<td class="nanForceZero">false</td>
 		</tr>
 		
@@ -207,6 +207,16 @@
 		</tr>
 		<tr class="formatNumberTest" title="Issue #53"> <td class="id">formatNumberTest17</td>
 			<td class="locale">es_ES</td> <td class="format">#.####%</td> <td class="input">0.0333456</td> <td class="output">n/a</td> <td class="ref">3,3346%</td> <td class="result">n/a</td>
+		</tr>
+		
+		<!-- Issue 56 -->
+		<tr class="formatNumberTest" title="Issue #53"> <td class="id">formatNumberTest18</td>
+			<td class="locale">es_US</td> <td class="format">#,###.00</td> <td class="input">2233</td> <td class="output">n/a</td> <td class="ref">2,233.00</td> <td class="result">n/a</td>
+			<td class="round">false</td>
+		</tr>
+		<tr class="formatNumberTest" title="Issue #53"> <td class="id">formatNumberTest19</td>
+			<td class="locale">es_US</td> <td class="format">#,###.##</td> <td class="input">2233</td> <td class="output">n/a</td> <td class="ref">2,233</td> <td class="result">n/a</td>
+			<td class="round">false</td>
 		</tr>
 	</table>
 	
