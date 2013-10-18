@@ -1,7 +1,6 @@
 $(document).ready(function() {
 
 	var testResultsDiv = $(".testResults");
-
 	var formatTestsRun = 0;
 	var formatTestsFailed = 0;
 	$(".formatTextTest").each(function() {
@@ -77,20 +76,22 @@ $(document).ready(function() {
 		var locale = $(this).find(".locale").text();
 		var input = $(this).find(".input");
 		var output = $(this).find(".output");
-		var ref = parseFloat($(this).find(".ref").text());
+		var refString = $(this).find(".ref").text();
+		var ref = parseFloat();
 		var result = $(this).find(".result");
 		var isPercentage = $(this).find(".isPercentage").text();
 		if (isPercentage == 'true')
 			isPercentage = true;
 		else
 			isPercentage = false;
+		var strict = $(this).find(".strict").text();
 		
 		// parse to number
-		var number = input.parseNumber({locale: locale, isPercentage: isPercentage}, false);
+		var number = input.parseNumber({locale: locale, isPercentage: isPercentage, strict: strict}, false);
 		output.text(number.toString());
 		
 		// read number back in as float, check against ref
-		if (number == ref) {
+		if (number == ref || '' + number == refString) {
 			result.text('PASSED');
 		} else {
 			result.text('FAILED');
