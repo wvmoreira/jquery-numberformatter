@@ -446,16 +446,16 @@
         
         // now we need to convert it into a number
         while (numberString.indexOf(group)>-1) {
-            numberString = numberString.replace(group,'');
+            numberString = numberString.replace(group, '');
 		}
-        numberString = numberString.replace(dec,".").replace(neg,"-");
-        var validText = "";
+        numberString = numberString.replace(dec, '.').replace(neg, '-');
+        var validText = '';
         var hasPercent = false;
-        if (numberString.charAt(numberString.length - 1) == "%" || options.isPercentage == true) {
+        if (numberString.charAt(numberString.length - 1) == '%' || options.isPercentage == true) {
             hasPercent = true;
 		}
 
-        for (var i=0; i<numberString.length; i++) {
+        for (var i = 0; i < numberString.length; i++) {
             if (valid.indexOf(numberString.charAt(i)) > -1) {
                 validText = validText + numberString.charAt(i);
 			} else if (validOnce.indexOf(numberString.charAt(i)) > -1) {
@@ -475,7 +475,7 @@
                 var decimalPoints = validText.length - decimalPos - 1;
                 number = number.toFixed(decimalPoints + 2);
             } else {
-                number = number.toFixed(validText.length - 1);
+                number = number.toFixed(2);
             }
         }
 
