@@ -105,7 +105,7 @@
     
     var nfLocalesLikeUS = [ 'ae','au','ca','cn','eg','gb','hk','il','in','jp','sk','th','tw','us' ];
     var nfLocalesLikeDE = [ 'at','br','de','dk','es','gr','it','nl','pt','tr','vn' ];
-    var nfLocalesLikeFR = [ 'cz','fi','fr','ru','se','pl','bg' ];
+    var nfLocalesLikeFR = [ 'bg','cz','fi','fr','no','pl','ru','se' ];
     var nfLocalesLikeCH = [ 'ch' ];
     
     var nfLocaleFormatting = [ [".", ","], [",", "."], [",", " "], [".", "'"] ]; 
