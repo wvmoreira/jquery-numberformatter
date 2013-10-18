@@ -440,19 +440,32 @@
         var group = formatData.group;
         var neg = formatData.neg;
 
-        var valid = "1234567890.-";
+        var valid = "1234567890";
+		var validOnce = '.-';
+		var strictMode = options.strict;
         
         // now we need to convert it into a number
-        while (numberString.indexOf(group)>-1)
+        while (numberString.indexOf(group)>-1) {
             numberString = numberString.replace(group,'');
+		}
         numberString = numberString.replace(dec,".").replace(neg,"-");
         var validText = "";
         var hasPercent = false;
-        if (numberString.charAt(numberString.length - 1) == "%" || options.isPercentage == true)
+        if (numberString.charAt(numberString.length - 1) == "%" || options.isPercentage == true) {
             hasPercent = true;
+		}
+
         for (var i=0; i<numberString.length; i++) {
-            if (valid.indexOf(numberString.charAt(i))>-1)
+            if (valid.indexOf(numberString.charAt(i)) > -1) {
                 validText = validText + numberString.charAt(i);
+			} else if (validOnce.indexOf(numberString.charAt(i)) > -1) {
+				validText = validText + numberString.charAt(i);
+				validOnce = validOnce.replace(numberString.charAt(i), '');
+			} else if (strictMode) {
+				// abort and force the text to NaN as it's not strictly valid
+				validText = 'NaN';
+				break;
+			}
         }
         var number = new Number(validText);
         if (hasPercent) {
@@ -473,7 +486,8 @@
         locale: "us",
         decimalSeparatorAlwaysShown: false,
         isPercentage: false,
-        isFullLocale: false
+        isFullLocale: false,
+		strict: false
     };
 
     jQuery.fn.formatNumber.defaults = {
