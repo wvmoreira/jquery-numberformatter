@@ -268,6 +268,17 @@
         var dec = formatData.dec;
         var group = formatData.group;
         var neg = formatData.neg;
+
+		// check overrides
+        if (options.overrideGroupSep != null) {
+            group = options.overrideGroupSep;
+        }
+        if (options.overrideDecSep != null) {
+            dec = options.overrideDecSep;
+        }
+        if (options.overrideNegSign != null) {
+            neg = options.overrideNegSign;
+        }
         
         // Check NAN handling
         var forcedToZero = false;
@@ -294,9 +305,9 @@
                 number = new Number(number.toFixed(decimalFormat.length));
             else {
                 var numStr = number.toString();
-				if (numStr.lastIndexOf('.') > 0) {
-                	numStr = numStr.substring(0, numStr.lastIndexOf('.') + decimalFormat.length + 1);
-				}
+                if (numStr.lastIndexOf('.') > 0) {
+                    numStr = numStr.substring(0, numStr.lastIndexOf('.') + decimalFormat.length + 1);
+                }
                 number = new Number(numStr);
             }
             
@@ -440,32 +451,43 @@
         var group = formatData.group;
         var neg = formatData.neg;
 
+        // check overrides
+        if (options.overrideGroupSep != null) {
+            group = options.overrideGroupSep;
+        }
+        if (options.overrideDecSep != null) {
+            dec = options.overrideDecSep;
+        }
+        if (options.overrideNegSign != null) {
+            neg = options.overrideNegSign;
+        }
+
         var valid = "1234567890";
-		var validOnce = '.-';
-		var strictMode = options.strict;
+        var validOnce = '.-';
+        var strictMode = options.strict;
         
         // now we need to convert it into a number
         while (numberString.indexOf(group)>-1) {
             numberString = numberString.replace(group, '');
-		}
+        }
         numberString = numberString.replace(dec, '.').replace(neg, '-');
         var validText = '';
         var hasPercent = false;
         if (numberString.charAt(numberString.length - 1) == '%' || options.isPercentage == true) {
             hasPercent = true;
-		}
+        }
 
         for (var i = 0; i < numberString.length; i++) {
             if (valid.indexOf(numberString.charAt(i)) > -1) {
                 validText = validText + numberString.charAt(i);
-			} else if (validOnce.indexOf(numberString.charAt(i)) > -1) {
-				validText = validText + numberString.charAt(i);
-				validOnce = validOnce.replace(numberString.charAt(i), '');
-			} else if (strictMode) {
-				// abort and force the text to NaN as it's not strictly valid
-				validText = 'NaN';
-				break;
-			}
+            } else if (validOnce.indexOf(numberString.charAt(i)) > -1) {
+                validText = validText + numberString.charAt(i);
+                validOnce = validOnce.replace(numberString.charAt(i), '');
+            } else if (strictMode) {
+                // abort and force the text to NaN as it's not strictly valid
+                validText = 'NaN';
+                break;
+            }
         }
         var number = new Number(validText);
         if (hasPercent) {
@@ -487,7 +509,10 @@
         decimalSeparatorAlwaysShown: false,
         isPercentage: false,
         isFullLocale: false,
-		strict: false
+        strict: false,
+        overrideGroupSep: null,
+        overrideDecSep: null,
+        overrideNegSign: null
     };
 
     jQuery.fn.formatNumber.defaults = {
@@ -496,7 +521,10 @@
         decimalSeparatorAlwaysShown: false,
         nanForceZero: true,
         round: true,
-        isFullLocale: false
+        isFullLocale: false,
+		overrideGroupSep: null,
+        overrideDecSep: null,
+        overrideNegSign: null
     };
     
     Number.prototype.toFixed = function(precision) {

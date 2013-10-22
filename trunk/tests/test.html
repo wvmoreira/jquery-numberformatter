@@ -20,7 +20,7 @@
 	<script src="test.js"></script>
 </head>
 <body>
-	<p>1.2.3-SNAPSHOT</p>
+	<p>1.2.4-SNAPSHOT</p>
 	<div class="testResults">Testing...</div>
 	
 	<h1>US Locale</h1>
@@ -505,6 +505,9 @@
 		<tr class="parseTest"> <td class="id">parseTest17</td>
 			<td class="locale">en</td> <td class="input">2000.12%</td> <td class="output">n/a</td> <td class="ref">20.0012</td> <td class="result">n/a</td>
 	    </tr>
+		<tr class="parseTest"> <td class="id">parseTest18</td>
+			<td class="locale">en</td> <td class="input">-2000000%</td> <td class="output">n/a</td> <td class="ref">-20000.00</td> <td class="result">n/a</td>
+	    </tr>
 	</table>
 	
 	<h1>Different Elements</h1>
@@ -519,6 +522,59 @@
 	<table>
 		<tr>
 			<td class="formatElementTest">1230.45</td> <td>n/a</td>
+		</tr>
+	</table>
+	
+	<h1>Parse Extra Options</h1>
+	<table style="width: 800px">
+		<tr>
+			<th>Id</th>
+			<th>Locale</th>
+			<th>Input</th>
+			<th>Output</th>
+			<th>Expected Output</th>
+			<th>Group Sep</th>
+			<th>Decimal Sep</th>
+			<th>Neg Sign</th>
+			<th>Test Result</th>
+		</tr>
+		<tr class="parseOptionsTest">
+			<td class="id">parseOptionsTest1</td>
+			<td class="locale">en</td>
+			<td class="input">N1/002?3</td>
+			<td class="output">n/a</td>
+			<td class="ref">-1002.3</td>
+			<td class="groupSep">/</td>
+			<td class="decSep">?</td>
+			<td class="negSign">N</td>
+			<td class="result">n/a</td>
+    	</tr>
+	</table>
+	
+	<h1>Format Extra Options</h1>
+	<table style="width: 800px">
+		<tr>
+			<th>Id</th>
+			<th>Locale</th>
+			<th>Formatting</th>
+			<th>Input</th>
+			<th>Output</th>
+			<th>Expected Output</th>
+			<th>Group Sep</th>
+			<th>Decimal Sep</th>
+			<th>Test Result</th>
+		</tr>
+		<tr class="formatOptionsTest" title="Issue #55">
+			<td class="id">formatOptionsTest1</td>
+			<td class="locale">us</td>
+			<td class="format">#.####%</td>
+			<td class="input">-0.0333456</td>
+			<td class="output">n/a</td>
+			<td class="ref">N3?3346%</td>
+			<td class="groupSep">/</td>
+			<td class="decSep">?</td>
+			<td class="negSign">N</td>
+			<td class="result">n/a</td>
 		</tr>
 	</table>
 </body>
