@@ -292,8 +292,9 @@
         }
 
         // special case for percentages
-        if (suffix == "%")
+        if (options.isPercentage == true || (options.autoDetectPercentage && suffix.charAt(suffix.length - 1) == '%')) {
             number = number * 100;
+		}
 
         var returnString = "";
         if (options.format.indexOf(".") > -1) {
@@ -472,9 +473,10 @@
         numberString = numberString.replace(dec, '.').replace(neg, '-');
         var validText = '';
         var hasPercent = false;
-        if (numberString.charAt(numberString.length - 1) == '%' || options.isPercentage == true) {
-            hasPercent = true;
-        }
+
+		if (options.isPercentage == true || (options.autoDetectPercentage && numberString.charAt(numberString.length - 1) == '%')) {
+			hasPercent = true;
+		}
 
         for (var i = 0; i < numberString.length; i++) {
             if (valid.indexOf(numberString.charAt(i)) > -1) {
@@ -506,7 +508,8 @@
     jQuery.fn.parseNumber.defaults = {
         locale: "us",
         decimalSeparatorAlwaysShown: false,
-        isPercentage: false,
+        isPercentage: false,			// treats the input as a percentage (i.e. input divided by 100)
+		autoDetectPercentage: true,		// will search if the input string ends with '%', if it does then the above option is implicitly set
         isFullLocale: false,
         strict: false,
         overrideGroupSep: null,
@@ -523,7 +526,9 @@
         isFullLocale: false,
         overrideGroupSep: null,
         overrideDecSep: null,
-        overrideNegSign: null
+        overrideNegSign: null,
+		isPercentage: false,			// treats the input as a percentage (i.e. input multiplied by 100)
+		autoDetectPercentage: true		// will search if the format string ends with '%', if it does then the above option is implicitly set
     };
     
     Number.prototype.toFixed = function(precision) {
