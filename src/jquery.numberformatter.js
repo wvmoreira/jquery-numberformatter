@@ -9,7 +9,7 @@
  * and GPL (GPL-LICENSE.txt) licenses.
  *
  * @author Michael Abernethy, Andrew Parry
- * @version 1.2.3-SNAPSHOT ($Id$)
+ * @version 1.2.4-SNAPSHOT ($Id$)
  * 
  * Dependencies
  * 
@@ -120,7 +120,7 @@
     function init() {
         // write the arrays into the hashtable
         for (var localeGroupIdx = 0; localeGroupIdx < nfAllLocales.length; localeGroupIdx++) {
-            localeGroup = nfAllLocales[localeGroupIdx];
+            var localeGroup = nfAllLocales[localeGroupIdx];
             for (var i = 0; i < localeGroup.length; i++) {
                 nfLocales.put(localeGroup[i], localeGroupIdx);
             }
