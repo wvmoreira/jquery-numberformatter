@@ -269,7 +269,7 @@
         var group = formatData.group;
         var neg = formatData.neg;
 
-		// check overrides
+        // check overrides
         if (options.overrideGroupSep != null) {
             group = options.overrideGroupSep;
         }
@@ -311,10 +311,9 @@
                 number = new Number(numStr);
             }
             
-            var decimalValue = number % 1;
-            var decimalString = new String(decimalValue.toFixed(decimalFormat.length));
-            decimalString = decimalString.substring(decimalString.lastIndexOf(".") + 1);
-            
+            var decimalValue = new Number(number.toString().substring(number.toString().indexOf('.')));
+            decimalString = new String(decimalValue.toFixed(decimalFormat.length));
+            decimalString = decimalString.substring(decimalString.lastIndexOf('.') + 1);
             for (var i = 0; i < decimalFormat.length; i++) {
                 if (decimalFormat.charAt(i) == '#' && decimalString.charAt(i) != '0') {
                     decimalPortion += decimalString.charAt(i);
@@ -522,7 +521,7 @@
         nanForceZero: true,
         round: true,
         isFullLocale: false,
-		overrideGroupSep: null,
+        overrideGroupSep: null,
         overrideDecSep: null,
         overrideNegSign: null
     };
