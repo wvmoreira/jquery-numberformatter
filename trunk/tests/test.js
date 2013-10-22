@@ -43,21 +43,22 @@ $(document).ready(function() {
 		var result = $(this).find(".result");
 		var nanForceZero = $(this).find(".nanForceZero").text();
 		var round = $(this).find(".round").text();
+		var isPercentage = $(this).find('.isPercentage').text() == 'true';
 		
 		// apply formatting
 		output.text(input);
 		if (format && locale && nanForceZero)
-			output.formatNumber({ format: format, locale: locale, nanForceZero: nanForceZero == 'true' });
+			output.formatNumber({ format: format, locale: locale, nanForceZero: nanForceZero == 'true', isPercentage: isPercentage });
 		else if (format && locale && round)
-			output.formatNumber({format:format, locale:locale, round:round});
+			output.formatNumber({ format:format, locale:locale, round:round, isPercentage: isPercentage });
 		else if (format && locale)
-			output.formatNumber({format:format, locale:locale});
+			output.formatNumber({ format:format, locale:locale, isPercentage: isPercentage });
 		else if (format)
-			output.formatNumber({format:format});
+			output.formatNumber({ format:format, isPercentage: isPercentage });
 		else if (locale)
-			output.formatNumber({locale:locale});
+			output.formatNumber({ locale:locale, isPercentage: isPercentage });
 		else
-			output.formatNumber();
+			output.formatNumber({ isPercentage: isPercentage });
 		
 		if (output.text() == ref)
 			result.text('PASSED');
@@ -80,14 +81,12 @@ $(document).ready(function() {
 		var ref = parseFloat();
 		var result = $(this).find(".result");
 		var isPercentage = $(this).find(".isPercentage").text();
-		if (isPercentage == 'true')
-			isPercentage = true;
-		else
-			isPercentage = false;
+		var autoDetectPercentage = $(this).find(".autoDetectPercentage").text() != 'false';
+		isPercentage = isPercentage == 'true';
 		var strict = $(this).find(".strict").text();
 		
 		// parse to number
-		var number = input.parseNumber({locale: locale, isPercentage: isPercentage, strict: strict}, false);
+		var number = input.parseNumber({locale: locale, isPercentage: isPercentage, strict: strict, autoDetectPercentage: autoDetectPercentage }, false);
 		output.text(number.toString());
 		
 		// read number back in as float, check against ref

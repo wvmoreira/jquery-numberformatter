@@ -218,6 +218,16 @@
 			<td class="locale">es_US</td> <td class="format">#,###.##</td> <td class="input">2233</td> <td class="output">n/a</td> <td class="ref">2,233</td> <td class="result">n/a</td>
 			<td class="round">false</td>
 		</tr>
+		
+		<!-- Defect #51 -->
+		<tr class="formatNumberTest" title="Issue #51"> <td class="id">formatNumberTest20</td>
+			<td class="locale">es_US</td> <td class="format">#,##0 %</td> <td class="input">0.5</td> <td class="output">n/a</td> <td class="ref">50 %</td> <td class="result">n/a</td>
+			<td class="round">false</td>
+		</tr>
+		<tr class="formatNumberTest" title="Issue #51"> <td class="id">formatNumberTest21</td>
+			<td class="locale">es_US</td> <td class="format">#,##0</td> <td class="input">0.5</td> <td class="output">n/a</td> <td class="ref">50</td> <td class="result">n/a</td>
+			<td class="isPercentage">true</td>
+		</tr>
 	</table>
 	
 	<h2>German Locale</h2>
@@ -507,6 +517,12 @@
 	    </tr>
 		<tr class="parseTest"> <td class="id">parseTest18</td>
 			<td class="locale">en</td> <td class="input">-2000000%</td> <td class="output">n/a</td> <td class="ref">-20000.00</td> <td class="result">n/a</td>
+	    </tr>
+	
+		<!-- Defect #51 -->
+		<tr class="parseTest"> <td class="id">parseTest19</td>
+			<td class="locale">en</td> <td class="input">50%</td> <td class="output">n/a</td> <td class="ref">50</td> <td class="result">n/a</td>
+			<td class="isPercentage">false<a class="autoDetectPercentage">false</a></false>
 	    </tr>
 	</table>
 	
