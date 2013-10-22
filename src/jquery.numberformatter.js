@@ -294,7 +294,7 @@
         // special case for percentages
         if (options.isPercentage == true || (options.autoDetectPercentage && suffix.charAt(suffix.length - 1) == '%')) {
             number = number * 100;
-		}
+        }
 
         var returnString = "";
         if (options.format.indexOf(".") > -1) {
@@ -474,9 +474,9 @@
         var validText = '';
         var hasPercent = false;
 
-		if (options.isPercentage == true || (options.autoDetectPercentage && numberString.charAt(numberString.length - 1) == '%')) {
-			hasPercent = true;
-		}
+        if (options.isPercentage == true || (options.autoDetectPercentage && numberString.charAt(numberString.length - 1) == '%')) {
+            hasPercent = true;
+        }
 
         for (var i = 0; i < numberString.length; i++) {
             if (valid.indexOf(numberString.charAt(i)) > -1) {
@@ -484,10 +484,15 @@
             } else if (validOnce.indexOf(numberString.charAt(i)) > -1) {
                 validText = validText + numberString.charAt(i);
                 validOnce = validOnce.replace(numberString.charAt(i), '');
-            } else if (strictMode) {
-                // abort and force the text to NaN as it's not strictly valid
-                validText = 'NaN';
-                break;
+            } else {
+                if (options.allowPostfix) {
+                    // treat anything after this point (inclusive) as a postfix
+                    break;
+                } else if (strictMode) {
+                    // abort and force the text to NaN as it's not strictly valid
+                    validText = 'NaN';
+                    break;
+                }
             }
         }
         var number = new Number(validText);
@@ -508,13 +513,14 @@
     jQuery.fn.parseNumber.defaults = {
         locale: "us",
         decimalSeparatorAlwaysShown: false,
-        isPercentage: false,			// treats the input as a percentage (i.e. input divided by 100)
-		autoDetectPercentage: true,		// will search if the input string ends with '%', if it does then the above option is implicitly set
+        isPercentage: false,            // treats the input as a percentage (i.e. input divided by 100)
+        autoDetectPercentage: true,     // will search if the input string ends with '%', if it does then the above option is implicitly set
         isFullLocale: false,
-        strict: false,
-        overrideGroupSep: null,
-        overrideDecSep: null,
-        overrideNegSign: null
+        strict: false,                  // will abort the parse if it hits any unknown char
+        overrideGroupSep: null,         // override for group separator
+        overrideDecSep: null,           // override for decimal point separator
+        overrideNegSign: null,          // override for negative sign
+        allowPostfix: false             // will truncate the input string as soon as it hits an unknown char
     };
 
     jQuery.fn.formatNumber.defaults = {
@@ -527,8 +533,8 @@
         overrideGroupSep: null,
         overrideDecSep: null,
         overrideNegSign: null,
-		isPercentage: false,			// treats the input as a percentage (i.e. input multiplied by 100)
-		autoDetectPercentage: true		// will search if the format string ends with '%', if it does then the above option is implicitly set
+        isPercentage: false,            // treats the input as a percentage (i.e. input multiplied by 100)
+        autoDetectPercentage: true      // will search if the format string ends with '%', if it does then the above option is implicitly set
     };
     
     Number.prototype.toFixed = function(precision) {
